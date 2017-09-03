@@ -33,7 +33,8 @@
     "tween-functions": "1.1.0",
     "uws": "^8.14.1",
     "victory-core": "^9.1.1",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "webpack": "^2.1.0-beta.25"
   },
   "peerDependencies": {
     "react": "^15.3.2",
