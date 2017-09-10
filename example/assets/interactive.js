@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Heading from "../../src/components/heading";
+import { Heading } from "../../src";
 
 export default class Interactive extends Component {
   constructor() {
