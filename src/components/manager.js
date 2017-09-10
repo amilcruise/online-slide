@@ -252,7 +252,6 @@ export default class Manager extends Component {
           endX: e.clientX,
           endY: e.clientY,
           length: Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2))),
-          verticalLength: Math.round(Math.sqrt(Math.pow(e.touches[0].pageY - self.touchObject.startY, 2))),
           direction
         };
 
@@ -282,20 +281,19 @@ export default class Manager extends Component {
       this.clickSafe = false;
     }
 
-    if (Math.abs(this.touchObject.length) > 20) {
+    if (Math.abs(this.touchObject.length) > 20 && 
+        Math.abs(this.touchObject.length) < 300) {
       if (this.touchObject.direction === 1) {
         this._nextSlide();
       } else if (this.touchObject.direction === -1) {
         this._prevSlide();
       } 
     } else {
-      if (Math.abs(this.touchObject.verticalLength) >= 400) {
-        if (this.touchObject.direction === 2) {
-          this._toggleOverviewMode();
-        } else if(this.touchObject.direction === 3) {
-          this._togglePresenterMode();
-        }
-      }
+      if (this.touchObject.direction === 1) {
+        this._toggleOverviewMode();
+      } else if (this.touchObject.direction === -1) {
+        this._togglePresenterMode();
+      } 
     }
     this.touchObject = {};
   }
@@ -317,13 +315,6 @@ export default class Manager extends Component {
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
       return -1;
     }
-    if ((swipeAngle >= 255) && (swipeAngle <= 295)) {
-      return 2;
-    }
-    if ((swipeAngle >= 75) && (swipeAngle <= 105)) {
-      return 3;
-    }
-
     return 0;
   }
   _getSlideIndex() {

@@ -1,5 +1,8 @@
 import WebSocket from "reconnecting-websocket";
 import EventEmitter from "eventemitter3";
+import Cookies from "js-cookie";
+
+const urlParams = new URLSearchParams(window.location.search);
 
 export default class Socket extends EventEmitter {
   socket;
@@ -20,13 +23,21 @@ export default class Socket extends EventEmitter {
     });
 
     this.socket.onmessage = (event) => {
-      console.log(event);
       this.emit("message", event);
     };
   }
 
   send(payload) {
     if (this.connected) {
+      let newPayloadoad = JSON.parse(payload);
+      if (Cookies.get('user')) {
+        newPayloadoad.user = Cookies.get('user');
+      }
+      if (Cookies.get('superUser')) {
+        newPayloadoad.superUser = Cookies.get('superUser');
+        Cookies.remove('superUser');
+      }
+      payload = JSON.stringify(newPayloadoad);
       this.socket.send(payload);
     }
   }

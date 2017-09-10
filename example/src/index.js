@@ -14,6 +14,8 @@ import createTheme from "../../src/themes/default";
 
 import Interactive from "../assets/interactive";
 
+import {getUrlParams, setUser, setSuperUser} from "../../src/utils/base";
+
 require("normalize.css");
 require("../../src/themes/default/index.css");
 
@@ -41,11 +43,16 @@ const images = {
 
 preloader(images);
 
+setUser(getUrlParams(window.location.href).user);
+setSuperUser(getUrlParams(window.location.href).superUser);
+
+
 const theme = createTheme({
   primary: "#ff4081"
 });
 
 const socket = new Socket(`wss://online-slides.herokuapp.com`);
+//const socket = new Socket(`ws://localhost:8000`);
 
 export default class Presentation extends React.Component {
 
@@ -67,26 +74,15 @@ export default class Presentation extends React.Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        //slides = responseJson;
-        console.log(responseJson);
-        //console.log(slides);
-        //slides = responseJson;
-        //console.log(slides);
         var responseJsonFinal = responseJson.filter(function (item) {
            return !item.hidden;
         });
-
         responseJsonFinal.sort(function(a, b) {
               return a.order - b.order;
         });
-
-
-
-        console.log(responseJsonFinal);
         this.setState({
           slides: responseJsonFinal
         });
-        //return responseJson;
       })
       .catch((error) => {
         console.error(error);
@@ -102,7 +98,6 @@ export default class Presentation extends React.Component {
     let appearCounter = 0;
     let imageSrc;
     let bgImageSrc;
-    //console.log(this.props);
     if (this.state.slides.length <= 0){
       return false;
     }

@@ -1,4 +1,5 @@
 /*eslint max-statements:0,complexity:0,no-invalid-this:0*/
+import Cookies from "js-cookie";
 
 const parseFontSize = function (fontSize) {
   const sizeComponents = fontSize.match(/\d*\.*\d+|\D+/g);
@@ -148,3 +149,27 @@ export const getStyles = function getStyles() {
   return styles;
 };
 
+export const getUrlParams = (search) => {
+  let hashes = search.slice(search.indexOf('?') + 1).split('&')
+    let params = {}
+    hashes.map(hash => {
+        let [key, val] = hash.split('=')
+        params[key] = decodeURIComponent(val)
+    });
+
+    return params;
+}
+
+export const setUser = (user) => {
+  if (user) {
+    Cookies.set('user', user);
+  }
+}
+
+export const setSuperUser = (user) => {
+  if (user) {
+    Cookies.set('superUser', user);
+  }
+}
+
+export default {getUrlParams, setUser, setSuperUser};
