@@ -20,6 +20,7 @@ export default class Socket extends EventEmitter {
     });
 
     this.socket.onmessage = (event) => {
+      console.log(event);
       this.emit("message", event);
     };
   }
