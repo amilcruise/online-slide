@@ -21,6 +21,7 @@
     "lodash": "^4.16.4",
     "mdast": "^2.1.0",
     "mdast-react": "git://github.com/jjt/mdast-react.git#2ea3bcd",
+    "moment": "^2.19.1",
     "normalize.css": "^5.0.0",
     "radium": "^0.18.0",
     "react-addons-transition-group": "^15.3.2",

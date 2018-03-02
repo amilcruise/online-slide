@@ -10,7 +10,7 @@ var config = require("./webpack.config");
 const util = require('util')
 var app = express();
 var compiler = webpack(config);
-var port = 3000;
+var port = 3001;
 var host = 'localhost';
 var state = {
   "state": {

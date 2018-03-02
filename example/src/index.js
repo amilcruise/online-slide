@@ -52,7 +52,7 @@ const theme = createTheme({
 });
 
 const socket = new Socket(`wss://online-slides.herokuapp.com`);
-//const socket = new Socket(`ws://localhost:8000`);
+//const socket = new Socket(`ws://localhost:3000/`);
 
 export default class Presentation extends React.Component {
 
