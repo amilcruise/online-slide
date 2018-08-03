@@ -112,7 +112,16 @@ export default class Presentation extends React.Component {
 
             var first;
             slide.items.sort(function(a, b){return a.order-b.order})
-            return (<Slide key={slide.id} bgImage={bgImageSrc || images.grass} transition={slide.transition.split(',')} bgColor={slide.bg_color || '#fff'} bgDarken={slide.bg_darken} >
+            return (<Slide 
+              key={slide.id} 
+              bgImage={bgImageSrc || images.grass} 
+              transition={slide.transition.split(',')} 
+              bgColor={slide.bg_color || '#fff'} 
+              bgDarken={slide.bg_darken} 
+              maxWidth="95%"
+              maxHeight="95%"
+              padding="5%"
+            >
                         {
                           slide.items.map(function(item, i){
                               if(item.src) {
@@ -124,7 +133,15 @@ export default class Presentation extends React.Component {
                                 if (item.item_type == "heading"){
                                   return(
                                       <Appear key={"appear" + appearCounter} fid={appearCounter}>
-                                           <Heading key={item.item_type+item.id} size={item.size} textSize={item.textsize} caps={item.caps} fit={item.fit} textColor={item.textcolor} margin={item.margin}>
+                                           <Heading 
+                                              key={item.item_type+item.id} 
+                                              size={item.size} 
+                                              textSize={item.textsize} 
+                                              caps={item.caps} 
+                                              fit={item.fit}
+                                              textColor={item.textcolor} 
+                                              margin={item.margin}
+                                            >
                                             {item.content}
                                            </Heading>
                                       </Appear>
@@ -142,7 +159,13 @@ export default class Presentation extends React.Component {
                                   return (
                                     <Appear key={"appear" + appearCounter} fid={i}>
                                       
-                                      <Text key={item.item_type+item.id} textColor={item.textcolor} margin={item.margin} textSize={item.textsize}>
+                                      <Text 
+                                        key={item.item_type+item.id} 
+                                        textColor={item.textcolor} 
+                                        margin={item.margin} 
+                                        textSize={item.textsize}
+                                        lineHeight={1.1} 
+                                      >
                                         {item.content}
                                       </Text>
                                      
@@ -152,16 +175,30 @@ export default class Presentation extends React.Component {
                                 
                               } else {
                                   if (item.item_type == "heading") {
-                                    return(<Heading key={item.item_type+item.id} size={item.size} textSize={item.textsize} caps={item.caps} fit={item.fit} textColor={item.textcolor} margin={item.margin}>
-                                              {item.content}
-                                             </Heading>)
+                                    return(
+                                      <Heading 
+                                        key={item.item_type+item.id} 
+                                        size={item.size} 
+                                        textSize={item.textsize} 
+                                        caps={item.caps} fit={item.fit} 
+                                        textColor={item.textcolor} 
+                                        margin={item.margin}
+                                      >
+                                        {item.content}
+                                      </Heading>)
                                   }
                                   if (item.item_type == "image"){
                                     return(<Image key={item.item_type+item.id} src={imageSrc} height={item.height} width={item.width} margin={item.margin} />)
                                   }
                                   if (item.item_type == "text"){
                                     return (
-                                      <Text key={item.item_type+item.id} textColor={item.textcolor} margin={item.margin} textSize={item.textsize}>
+                                      <Text 
+                                          key={item.item_type+item.id} 
+                                          textColor={item.textcolor} 
+                                          margin={item.margin} 
+                                          textSize={item.textsize}
+                                          lineHeight={1.1} 
+                                        >
                                         {item.content}
                                       </Text>
                                     )

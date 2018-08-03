@@ -19,7 +19,7 @@ class Slide extends Component {
     this.setZoom();
     const slide = this.slideRef;
     const frags = slide.querySelectorAll(".fragment");
-    if (frags && frags.length && !this.context.overview) {
+    if (frags && frags.length && !this.props.overview) {
       const lastAction = this.context.store.getState().lastAction;
       Array.prototype.slice.call(frags, 0).forEach((frag, i) => {
         frag.dataset.fid = i;
@@ -91,7 +91,7 @@ class Slide extends Component {
         flex: 1,
         maxHeight: this.props.maxHeight || 700,
         maxWidth: this.props.maxWidth || 1000,
-        transform: `scale(${this.state.contentScale})`,
+        transform: `scale(${this.props.overview ? 1 : this.state.contentScale})`,
         padding: this.state.zoom > 0.6 ? this.props.margin || 40 : 10
       }
     };
@@ -115,7 +115,7 @@ class Slide extends Component {
 
   @renderTransition
   render() {
-    const { presenterStyle, children } = this.props;
+    const { presenterStyle, children, overview } = this.props;
     const { styles, overViewStyles, printStyles } = this.allStyles();
 
     if (!this.props.viewerScaleMode) {
@@ -133,13 +133,13 @@ class Slide extends Component {
           presenterStyle
         ]}
       >
-        <div style={[styles.inner, this.context.overview && overViewStyles.inner]}>
+        <div style={[styles.inner, overview && overViewStyles.inner]}>
           <div ref={(c) => { this.contentRef = c; }}
             className={`${contentClass} spectacle-content`}
             style={[
               styles.content,
               this.context.styles.components.content,
-              this.context.overview && overViewStyles.content
+              overview && overViewStyles.content
             ]}
           >
             {children}

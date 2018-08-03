@@ -49,7 +49,8 @@ export default class Overview extends Component {
         print: this.props.route.params.indexOf("print") !== -1,
         transition: [],
         transitionDuration: 0,
-        appearOff: true
+        appearOff: true,
+        overview: true
       });
       return (
         <div key={index} style={[style]} onClick={this._slideClicked.bind(this, index)}>
